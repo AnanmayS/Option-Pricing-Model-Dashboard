@@ -1,94 +1,102 @@
-# Black-Scholes Option Pricing Model Dashboard
+# Black-Scholes Option Pricing Model Calculator
 
-A Streamlit web application for calculating and visualizing European option prices using the Black-Scholes model. This interactive dashboard allows users to explore how different parameters affect option prices and profit/loss (P&L) calculations.
+An interactive web application for calculating and visualizing option prices using the Black-Scholes model. Built with Streamlit, this tool provides real-time option pricing, P&L calculations, and dynamic visualizations.
 
 ## Features
 
-- Real-time calculation of European Call and Put option prices
-- Interactive parameter adjustment through sidebar controls
-- Visual P&L analysis through dynamic heatmaps
-- Put-Call parity verification
-- Comprehensive parameter summary display
-- P&L calculations with purchase price tracking
-- Responsive visualization of price sensitivities
-
-## Requirements
-
-```
-streamlit
-numpy
-scipy
-pandas
-seaborn
-matplotlib
-```
+- **Real-time Option Pricing**: Calculate European Call and Put option prices instantly
+- **Interactive Parameters**: Adjust all Black-Scholes model inputs through an intuitive sidebar
+- **P&L Analysis**: Track potential profits and losses with purchase price inputs
+- **Visual Analytics**: 
+  - Dynamic heatmaps showing price sensitivity to stock price and volatility changes
+  - Color-coded P&L visualization (green for profit, red for loss)
+  - Current position marker on heatmaps
+- **Put-Call Parity**: Automatic verification of put-call parity relationship
+- **Educational Tools**: Helpful tooltips and explanations throughout the interface
 
 ## Installation
 
-1. Clone this repository
-2. Install the required packages:
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/BSMModel.git
+cd BSMModel
+```
+
+2. Create and activate a virtual environment (optional but recommended):
+```bash
+python -m venv .venv
+source .venv/bin/activate  # On Windows, use: .venv\Scripts\activate
+```
+
+3. Install the required packages:
 ```bash
 pip install -r requirements.txt
 ```
 
 ## Usage
 
-1. Start the Streamlit application:
+1. Run the Streamlit application:
 ```bash
 streamlit run app.py
 ```
 
-2. Access the dashboard through your web browser (typically at `http://localhost:8501`)
+2. Open your web browser and navigate to the URL shown in the terminal (typically http://localhost:8501)
 
-3. Adjust parameters using the sidebar controls:
-   - Market Parameters:
-     - Current Stock Price (S)
-     - Volatility (σ)
-     - Risk-Free Interest Rate (r)
-   - Option Parameters:
-     - Strike Price (K)
-     - Time to Expiration (T)
-   - Purchase Prices:
-     - Call Option Purchase Price
-     - Put Option Purchase Price
+3. Use the sidebar to adjust parameters:
+   - Stock Price (S)
+   - Strike Price (K)
+   - Time to Expiration (T)
+   - Risk-free Rate (r)
+   - Volatility (σ)
+   - Option Purchase Prices
 
-## Features Explanation
+4. View results in real-time:
+   - Current option prices
+   - P&L calculations
+   - Price sensitivity heatmaps
+   - Put-call parity verification
 
-### Main Dashboard
-- **Current Option Prices**: Real-time display of calculated Call and Put option prices
-- **P&L Metrics**: Shows current profit/loss based on purchase prices
-- **Put-Call Parity**: Verification of the put-call parity relationship
-- **Price Sensitivity Heatmaps**: Visual representation of how option prices change with stock price and volatility
+## Mathematical Background
 
-### Interactive Controls
-- Adjustable stock price range for heatmaps
-- Configurable maximum volatility display
-- Comprehensive parameter summary in sidebar
+The Black-Scholes model uses the following formulas:
 
-### Visualization
-- Color-coded heatmaps (green for profit, red for loss)
-- Current price/volatility point marked with white dot
-- Numerical P&L values displayed in heatmap cells
+Call Option Price:
+\[ C = SN(d_1) - Ke^{-rT}N(d_2) \]
 
-## Technical Details
+Put Option Price:
+\[ P = Ke^{-rT}N(-d_2) - SN(-d_1) \]
 
-The application implements the Black-Scholes model using the following key functions:
+Where:
+\[ d_1 = \frac{\ln(S/K) + (r + \sigma^2/2)T}{\sigma\sqrt{T}} \]
+\[ d_2 = d_1 - \sigma\sqrt{T} \]
 
-- `black_scholes_call()`: Calculates European call option prices
-- `black_scholes_put()`: Calculates European put option prices
-- `create_heatmap_data()`: Generates data for P&L visualization
+- S: Current stock price
+- K: Strike price
+- T: Time to expiration (in years)
+- r: Risk-free interest rate
+- σ: Volatility
+- N(): Cumulative standard normal distribution function
 
-## Limitations
+## Requirements
 
-- Only supports European-style options
-- Assumes constant volatility and risk-free rate
-- Does not account for dividends
-- Simplified market assumptions inherent to the Black-Scholes model
+- Python 3.8+
+- Streamlit
+- NumPy
+- SciPy
+- Pandas
+- Seaborn
+- Matplotlib
 
 ## Contributing
 
-Feel free to submit issues, fork the repository, and create pull requests for any improvements.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-[MIT License](LICENSE)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Black-Scholes-Merton model (1973)
+- Streamlit framework
+- Scientific Python community
