@@ -58,24 +58,58 @@ streamlit run app.py
 
 ## Mathematical Background
 
-The Black-Scholes model uses the following formulas:
+### Key Parameters
+| Parameter | Symbol | Description |
+|-----------|--------|-------------|
+| Stock Price | S | Current market price of the underlying stock |
+| Strike Price | K | Price at which the option can be exercised |
+| Time to Expiration | T | Time until option expiry (in years) |
+| Risk-free Rate | r | Annual risk-free interest rate (as decimal) |
+| Volatility | σ (sigma) | Annual volatility of the stock (as decimal) |
 
-Call Option Price:
-\[ C = SN(d_1) - Ke^{-rT}N(d_2) \]
+### Option Price Formulas
 
-Put Option Price:
-\[ P = Ke^{-rT}N(-d_2) - SN(-d_1) \]
+#### Call Option Price (C):
+```
+C = S × N(d₁) - K × e^(-rT) × N(d₂)
+```
 
-Where:
-\[ d_1 = \frac{\ln(S/K) + (r + \sigma^2/2)T}{\sigma\sqrt{T}} \]
-\[ d_2 = d_1 - \sigma\sqrt{T} \]
+#### Put Option Price (P):
+```
+P = K × e^(-rT) × N(-d₂) - S × N(-d₁)
+```
 
-- S: Current stock price
-- K: Strike price
-- T: Time to expiration (in years)
-- r: Risk-free interest rate
-- σ: Volatility
-- N(): Cumulative standard normal distribution function
+#### Where d₁ and d₂ are:
+```
+d₁ = [ln(S/K) + (r + σ²/2)T] / (σ√T)
+d₂ = d₁ - σ√T
+```
+
+### Formula Components Explained
+- `N(x)`: Cumulative standard normal distribution function
+- `e`: Mathematical constant (≈ 2.71828)
+- `ln(x)`: Natural logarithm
+- `√T`: Square root of time to expiration
+
+### Example
+For a stock with:
+- Stock Price (S) = $100
+- Strike Price (K) = $100
+- Time (T) = 1 year
+- Risk-free Rate (r) = 5% (0.05)
+- Volatility (σ) = 20% (0.20)
+
+The formula would calculate:
+1. First, find d₁ and d₂
+2. Then plug these values into the call or put formula
+3. The result gives the theoretical fair price of the option
+
+### Put-Call Parity
+The relationship between call and put prices:
+```
+C - P = S - K × e^(-rT)
+```
+This means that for the same strike price and expiration, the difference between call and put prices should equal the difference between the current stock price and the discounted strike price.
 
 ## Requirements
 
